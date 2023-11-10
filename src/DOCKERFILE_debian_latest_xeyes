@@ -1,0 +1,13 @@
+FROM debian:latest
+
+RUN apt-get update 
+RUN apt-get install --no-install-recommends -y x11-apps \
+&& rm -rf /usr/share/doc/* \
+&& rm -rf /usr/share/info/* \
+&& rm -rf /tmp/* \
+&& rm -rf /var/tmp/* \
+&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
+
+RUN useradd -ms /bin/bash user
+USER user
+CMD xeyes

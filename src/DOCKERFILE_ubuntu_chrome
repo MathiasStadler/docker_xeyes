@@ -1,0 +1,29 @@
+# FROM HERE
+# https://stackoverflow.com/questions/70955307/how-to-install-google-chrome-in-a-docker-container
+
+FROM ubuntu:23.10
+
+RUN apt-get update; apt-get clean
+
+# Install wget.
+RUN apt-get install  -y wget
+
+RUN apt-get install  -y gnupg
+
+# FROM HERE
+# https://forum.qt.io/topic/137126/qt-qpa-plugin-could-not-find-the-qt-platform-plugin-xcb-in/9
+# not found
+# RUN apt-get install libxcb-util-dev
+RUN apt-get install -y libxcb-util0-dev
+# failed to solve
+# RUN apt-get install -y libxcb-util0
+
+
+# Set the Chrome repo.
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+
+# Install Chrome.
+RUN apt-get update && apt-get  -y install google-chrome-stable
+
+ENTRYPOINT ["google-chrome","--disable-gpu-sandbox"]
