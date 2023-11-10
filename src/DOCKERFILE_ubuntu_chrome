@@ -26,4 +26,10 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 # Install Chrome.
 RUN apt-get update && apt-get  -y install google-chrome-stable
 
-ENTRYPOINT ["google-chrome","--disable-gpu-sandbox"]
+# deault user for chrome
+RUN adduser --disabled-password --gecos '' default_user
+
+USER default_user
+
+# ENTRYPOINT ["google-chrome","--no-sandbox","--disable-gpu-sandbox"]
+ENTRYPOINT ["google-chrome","--no-sandbox","--disable-gpu-sandbox"]

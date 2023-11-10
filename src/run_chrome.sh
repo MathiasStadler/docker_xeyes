@@ -5,7 +5,7 @@ export DISPLAY=:0 && docker run \
   -e DISPLAY \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -v /var/run/dbus:/var/run/dbus  \
-  docker_chrome:latest
+  docker_chrome_23_10:latest
 
   #-V /var/run/dbus:/var/run/dbus  \ =>  https://community.toradex.com/t/dbus-access-in-container/11625
 
